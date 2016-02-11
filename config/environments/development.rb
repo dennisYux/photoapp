@@ -27,3 +27,6 @@ Photoapp::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 end
+
+# Oauth fallback
+OAUTH_FALLBACK_URL = 'http://localhost:3000/oauth_fallback'

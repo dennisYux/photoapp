@@ -13,3 +13,4 @@ Photoapp::Application.config.secret_key_base = 'ffa2b0feb25bd71daab49a711de2df38
 
 # 500px API secret
 FiveHundredPX_API_CONSUMER_KEY = 'KPDGbiIEihwIAICjkh0jGmYN9EpyVSgRJhJwDeMv'
+FiveHundredPX_API_CONSUMER_SECRET = 'sFl73BTAkfKl4IbVsjybEiNUG6SqLNa821T8LomX'

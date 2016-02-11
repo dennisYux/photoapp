@@ -78,3 +78,6 @@ Photoapp::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 end
+
+# Oauth fallback
+OAUTH_FALLBACK_URL = 'http://localhost:3000/oauth_fallback'
