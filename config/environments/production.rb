@@ -79,5 +79,5 @@ Photoapp::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 end
 
-# Oauth fallback
-OAUTH_FALLBACK_URL = 'http://localhost:3000/oauth_fallback'
+# Oauth callback
+FiveHundredPX_OAUTH_CALLBACK_URL = 'http://localhost:3000/oauth_callback'

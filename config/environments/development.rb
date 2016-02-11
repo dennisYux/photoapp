@@ -28,5 +28,5 @@ Photoapp::Application.configure do
   config.assets.debug = true
 end
 
-# Oauth fallback
-OAUTH_FALLBACK_URL = 'http://localhost:3000/oauth_fallback'
+# Oauth callback
+FiveHundredPX_OAUTH_CALLBACK_URL = 'http://localhost:3000/fivehundredpx_callback'

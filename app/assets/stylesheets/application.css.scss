@@ -14,6 +14,7 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
 
 // nav-fixed-top
 body { padding-top: 100px; }
@@ -24,4 +25,8 @@ body { padding-top: 100px; }
   img {
     max-height: 100%;
   }
+}
+
+.navbar .navbar-link {
+  margin: 30px 20px 0 0;
 }
