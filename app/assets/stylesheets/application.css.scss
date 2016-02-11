@@ -14,3 +14,14 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+// nav-fixed-top
+body { padding-top: 100px; }
+
+.navbar .navbar-header .navbar-brand {
+  height: 80px;
+
+  img {
+    max-height: 100%;
+  }
+}
