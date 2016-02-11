@@ -6,8 +6,12 @@
         Photo Gallery
       </a>
     </div>
-    <a class="navbar-link navbar-right" href="/fivehundredpx_oauth">
-      <i class="fa fa-500px fa-2x"></i>
-    </a>
+    <% if has_fivehundredpx_access_token? %>
+      <%= link_to('LOGOUT', "/logout", method: :delete, class: "navbar-link navbar-right") %>
+    <% else %>
+      <a class="navbar-link navbar-right" href="/auth/fivehundredpx">
+        <i class="fa fa-500px fa-2x"></i>
+      </a>
+    <% end %>
   </div>
 </nav>

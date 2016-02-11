@@ -80,4 +80,4 @@ Photoapp::Application.configure do
 end
 
 # Oauth callback
-FiveHundredPX_OAUTH_CALLBACK_URL = 'http://localhost:3000/oauth_callback'
+FiveHundredPX_OAUTH_CALLBACK_URL = 'http://localhost:3000/auth/fivehundredpx/callback'

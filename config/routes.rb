@@ -3,8 +3,9 @@ Photoapp::Application.routes.draw do
 
   resources :photos
   
-  get 'fivehundredpx_oauth' => 'session#fivehundredpx_oauth'
-  get 'fivehundredpx_callback' => 'session#fivehundredpx_callback'
+  get 'auth/fivehundredpx' => 'session#fivehundredpx_oauth'
+  get 'auth/fivehundredpx/callback' => 'session#fivehundredpx_callback'
+  delete 'logout' => 'session#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
