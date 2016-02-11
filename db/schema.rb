@@ -11,15 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211054355) do
-
-  create_table "photos", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name"
-    t.string   "description"
-    t.float    "rating"
-    t.string   "image_url"
-  end
+ActiveRecord::Schema.define(version: 0) do
 
 end

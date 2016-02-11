@@ -4,10 +4,10 @@
 # (If a photo comes from external source, we would only build it in memory without persistence)
 # Since we parse photo structure (considering various sources) in server side
 # Front end UI becomes easy to build
-class Photo < ActiveRecord::Base
-  # 'class Photo < ActiveRecord::Base' seems overkill for current need
-  # 'class Photo < OpenStruct' would be more proper if no persistence
-  # Still, forward-compatibility
+class Photo
+  # 'class Photo < ActiveRecord::Base' seems overkill for current need (since no persistence)
+  # We use a plain ruby class for uni-structure purpose
+  attr_accessor :name, :description, :rating, :image_url
 
   def setup_from_fivehundredpx(photo)
     return if photo.blank?
