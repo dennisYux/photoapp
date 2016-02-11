@@ -10,3 +10,6 @@
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
 Photoapp::Application.config.secret_key_base = 'ffa2b0feb25bd71daab49a711de2df3893303b4648258f6fd564aea514c67faa24ff25ab6838c92bc522014af94e079753f01ddaaa57fdad302534b74fa61825'
+
+# 500px API secret
+FiveHundredPX_API_CONSUMER_KEY = 'KPDGbiIEihwIAICjkh0jGmYN9EpyVSgRJhJwDeMv'
