@@ -2,9 +2,13 @@ Photoapp::Application.routes.draw do
   root 'photos#index'
 
   resources :photos
-  
+
+  post 'photos/:source/:source_id/vote' => 'photos#vote'
+  delete 'photos/:source/:source_id/vote' => 'photos#cancel_vote'
+
   get 'auth/fivehundredpx' => 'session#fivehundredpx_oauth'
   get 'auth/fivehundredpx/callback' => 'session#fivehundredpx_callback'
+
   delete 'logout' => 'session#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.

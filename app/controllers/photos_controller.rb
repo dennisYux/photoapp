@@ -2,6 +2,7 @@ require 'uri'
 require 'net/http'
 
 class PhotosController < ApplicationController
+  before_filter :authenticate_fivehundredpx_access!, except: [:index]
 
   # Here we request photo stream from server side and then push it to front end
   # Apparently we could do this in front end with Javascript directly (via cross site ajax)
@@ -38,5 +39,47 @@ class PhotosController < ApplicationController
     end
 
     render :index
+  end
+
+  # Idealy we should have current user's vote/unvote state for each photo once user signed in
+  # However it seems there's no easy way to do it.
+  # We have to query /photos/:id/votes for each photo and check whether current user has voted
+  # It should be out of the task 2 scope
+  # We assume current user does not vote any photo yet
+  # We report success even if the vote action is forbidden due to already voted
+  def vote
+    if params[:source].blank? || params[:source_id].blank?
+      render :json => {message: 'Missing image info'}, :status => 400
+      return
+    end
+
+    # Process 500px photo vote request
+    if params[:source] == Photo::FivehundredPX
+      res = current_fivehundredpx_access_token.post("/photos/#{params[:source_id]}/vote?vote=1")
+      if !res.kind_of?(Net::HTTPSuccess) && !res.kind_of?(Net::HTTPForbidden)
+        render :json => {message: "Fail to vote: #{res.message}"}, :status => res.code
+        return
+      end
+    end
+    # Return success response
+    render :json => {message: "Successfully vote!"}
+  end
+
+  def cancel_vote
+    if params[:source].blank? || params[:source_id].blank?
+      render :json => {message: 'Missing image info'}, :status => 400
+      return
+    end
+
+    # Process 500px photo cancel vote request
+    if params[:source] == Photo::FivehundredPX
+      res = current_fivehundredpx_access_token.delete("/photos/#{params[:source_id]}/vote")
+      if !res.kind_of?(Net::HTTPSuccess) && !res.kind_of?(Net::HTTPForbidden)
+        render :json => {message: "Fail to cancel vote: #{res.message}"}, :status => res.code
+        return
+      end
+    end
+    # Return success response
+    render :json => {message: "Successfully cancel vote!"}
   end
 end

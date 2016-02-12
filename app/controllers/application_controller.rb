@@ -5,12 +5,16 @@ class ApplicationController < ActionController::Base
 
   def authenticate_fivehundredpx_access!
     if !current_fivehundredpx_access_token
-      redirect_to fivehundredpx_oauth_path
+      flash[:error] = 'You have to sign in with 500px account'
+      redirect_to auth_fivehundredpx_path
     end
   end
 
   def current_fivehundredpx_access_token
-    session[:fivehundredpx_access_token]
+    if !@current_fivehundredpx_access_token && session[:fivehundredpx_access_token_hash].present?
+      @current_fivehundredpx_access_token = OAuth::AccessToken.from_hash(fivehundredpx_consumer, session[:fivehundredpx_access_token_hash])
+    end
+    @current_fivehundredpx_access_token
   end
 
   def has_fivehundredpx_access_token?
@@ -19,4 +23,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_fivehundredpx_access_token
   helper_method :has_fivehundredpx_access_token?
+
+  def fivehundredpx_consumer
+    OAuth::Consumer.new(FiveHundredPX_API_CONSUMER_KEY, FiveHundredPX_API_CONSUMER_SECRET, site: FiveHundredPX_API_URL)
+  end
 end

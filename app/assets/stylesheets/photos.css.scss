@@ -1,3 +1,36 @@
 // Place all the styles related to the photos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.img-container {
+  display: inline-block;
+}
+
+.img-action {
+  padding: 10px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  transform: translateY(-15px);
+  margin-top: -40px;
+
+  .unliked:before, .liked:before {
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    font-size: 24px;
+    color: #ff4c4c;
+    cursor: pointer;
+  }
+
+  .unliked:before {
+    content: "\f08a";
+  }
+
+  .liked:before {
+    content: "\f004";
+  }
+}
+

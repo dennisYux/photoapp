@@ -1,7 +1,16 @@
 <div class="container-fluid">
   <div class="text-center">
   <% @photos.each do |photo| %>
-    <%= image_tag(photo.image_url, class: "img-thumbnail") %>
+    <div class="img-container">
+      <div class="img-content">
+        <%= image_tag(photo.image_url, class: "img-thumbnail") %>
+      </div>
+      <% if photo.from_fivehundredpx? && has_fivehundredpx_access_token? %>
+        <div class="img-action">
+          <span class="unliked" data-source="<%= photo.source %>" data-source-id="<%= photo.source_id %>"></span>
+        </div>
+      <% end %>
+    </div>
   <% end %>
   </div>
 </div>

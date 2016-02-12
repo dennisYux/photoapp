@@ -7,14 +7,21 @@
 class Photo
   # 'class Photo < ActiveRecord::Base' seems overkill for current need (since no persistence)
   # We use a plain ruby class for uni-structure purpose
-  attr_accessor :name, :description, :rating, :image_url
+  attr_accessor :source, :source_id, :name, :description, :rating, :image_url
+
+  FivehundredPX = "500px"
 
   def setup_from_fivehundredpx(photo)
     return if photo.blank?
+    self.source      = FivehundredPX
+    self.source_id   = photo[:id]
     self.name        = photo[:name]
     self.description = photo[:description]
     self.rating      = photo[:rating]
     self.image_url   = photo[:image_url]
   end
 
+  def from_fivehundredpx?
+    self.source == FivehundredPX
+  end
 end
