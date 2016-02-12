@@ -12,22 +12,50 @@ class SessionController < ApplicationController
   # so that a user could interact with 500px resources without having to reauthorize
   # User expires the access token by manually logout
   def fivehundredpx_oauth
-    consumer = fivehundredpx_consumer
-    request_token = consumer.get_request_token(oauth_callback: FiveHundredPX_OAUTH_CALLBACK_URL)
-    session[:fivehundredpx_request_token_hash] = request_token.params.to_hash
-    redirect_to request_token.authorize_url
+    request_token = begin
+      fivehundredpx_consumer.get_request_token(oauth_callback: FiveHundredPX_OAUTH_CALLBACK_URL)
+    rescue Exception => e
+      puts e.message
+      puts e.backtrace.join("\n")
+      nil
+    end
+    if request_token
+      # Only store token and secret
+      session[:fivehundredpx_request_token_hash] = request_token.params.to_hash
+      redirect_to request_token.authorize_url
+    else
+      session[:fivehundredpx_request_token_hash] = nil
+      # Redirect to root path to reauth
+      redirect_to root_path
+    end
   end
 
   def fivehundredpx_callback
+    # Validations
     request_token_hash = session[:fivehundredpx_request_token_hash]
     if request_token_hash.blank?
       redirect_to root_path
     end
-    consumer = fivehundredpx_consumer
-    request_token = OAuth::RequestToken.from_hash(consumer, request_token_hash)
-    access_token = request_token.get_access_token(oauth_verifier: params[:oauth_verifier])
+    oauth_verifier = params[:oauth_verifier]
+    if oauth_verifier.blank?
+      redirect_to root_path
+    end
+
+    request_token = OAuth::RequestToken.from_hash(fivehundredpx_consumer, request_token_hash)
+    access_token = begin
+      request_token.get_access_token(oauth_verifier: oauth_verifier)
+    rescue Exception => e
+      puts e.message
+      puts e.backtrace.join("\n")
+      nil
+    end
     session[:fivehundredpx_request_token_hash] = nil
-    session[:fivehundredpx_access_token_hash] = access_token.params.to_hash
+    session[:fivehundredpx_access_token_hash] = if access_token
+      # Only store token and secret
+      access_token.params.to_hash
+    else
+      nil
+    end
     redirect_to root_path
   end
 

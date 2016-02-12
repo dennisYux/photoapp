@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  if Rails.env.production?
+    rescue_from Exception, :with => :render_global_error
+  end
+
   def authenticate_fivehundredpx_access!
     if !current_fivehundredpx_access_token
       flash[:error] = 'You have to sign in with 500px account'
@@ -26,5 +30,15 @@ class ApplicationController < ActionController::Base
 
   def fivehundredpx_consumer
     OAuth::Consumer.new(FiveHundredPX_API_CONSUMER_KEY, FiveHundredPX_API_CONSUMER_SECRET, site: FiveHundredPX_API_URL)
+  end
+
+  # Respond to global exception
+  def render_global_error(e)
+    puts e.message + "\n " + e.backtrace.join("\n ")
+
+    respond_to do |format| 
+      format.html {render file: 'public/404.html', :status => 404}
+      format.all  {render json: {message: 'exception occurred'}, :status => 404}
+    end
   end
 end
