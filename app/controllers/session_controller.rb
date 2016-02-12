@@ -31,19 +31,13 @@ class SessionController < ApplicationController
   end
 
   def fivehundredpx_callback
-    # Validations
-    request_token_hash = session[:fivehundredpx_request_token_hash]
-    if request_token_hash.blank?
+    if session[:fivehundredpx_request_token_hash].blank? || params[:oauth_verifier].blank? 
       redirect_to root_path
+      return
     end
-    oauth_verifier = params[:oauth_verifier]
-    if oauth_verifier.blank?
-      redirect_to root_path
-    end
-
-    request_token = OAuth::RequestToken.from_hash(fivehundredpx_consumer, request_token_hash)
+    request_token = OAuth::RequestToken.from_hash(fivehundredpx_consumer, session[:fivehundredpx_request_token_hash])
     access_token = begin
-      request_token.get_access_token(oauth_verifier: oauth_verifier)
+      request_token.get_access_token(oauth_verifier: params[:oauth_verifier])
     rescue Exception => e
       puts e.message
       puts e.backtrace.join("\n")
