@@ -20,7 +20,7 @@ Photoapp::Application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -80,4 +80,4 @@ Photoapp::Application.configure do
 end
 
 # Oauth callback
-FiveHundredPX_OAUTH_CALLBACK_URL = 'http://localhost:3000/auth/fivehundredpx/callback'
+FiveHundredPX_OAUTH_CALLBACK_URL = 'http://photogal.herokuapp.com/auth/fivehundredpx/callback'
