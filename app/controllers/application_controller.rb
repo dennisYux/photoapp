@@ -9,8 +9,10 @@ class ApplicationController < ActionController::Base
 
   def authenticate_fivehundredpx_access!
     if !current_fivehundredpx_access_token
-      flash[:error] = 'You have to sign in with 500px account'
-      redirect_to auth_fivehundredpx_path
+      respond_to do |format| 
+        format.html {redirect_to auth_fivehundredpx_path}
+        format.all  {render json: {message: 'You have to sign in with 500px account'}, :status => 401}
+      end
     end
   end
 

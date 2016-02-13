@@ -3,7 +3,6 @@ Photoapp.Views.PhotosThumbView = Backbone.View.extend({
   className: "img-container",
   // HTML template
   template: JST["backbone/templates/photos/thumb"],
-
   // Events to listen
   events: {
     "click .destroy": "clear",
@@ -27,20 +26,18 @@ Photoapp.Views.PhotosThumbView = Backbone.View.extend({
   // Toggle photo isLiked
   toggleLiked: function() {
     var _this = this;
-    var url = "/photos/"+this.model.source+"/"+this.model.sourceId+"/vote";
+    var isLiked = this.model.get("isLiked");
+    var type = isLiked ? "DELETE" : "POST";
+    // Have to specify .json
+    var url = "/photos/"+this.model.get("source")+"/"+this.model.get("source_id")+"/vote.json";
     var errorHandler = function(xhr) {
       console.error(xhr.responseText);
     };
     var successHandler = function(data) {
-      _this.model.isLiked = !_this.model.isLiked;
-      _this.model.trigger('change');
+      _this.model.set("isLiked", !isLiked);
+      _this.model.trigger('change', _this.model, {});
     };
-    if (this.model.isLiked) {
-      var type = "POST";
-    } else {
-      var type = "DELETE";
-    }
-    // JQuery ajax to server
+    // JQuery ajax
     $.ajax({
       type: type,
       url: url,
@@ -54,6 +51,6 @@ Photoapp.Views.PhotosThumbView = Backbone.View.extend({
     // this.model.destroy();
     // Otherwise, trigger a 'destroy' event
     // Let backbone do the magic by deleting model from any collection containing it
-    this.model.trigger('destroy');
+    this.model.trigger('destroy', this.model, {});
   }
 });
