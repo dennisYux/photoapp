@@ -5,8 +5,8 @@ Photoapp.Views.PhotosThumbView = Backbone.View.extend({
   template: JST["backbone/templates/photos/thumb"],
   // Events to listen
   events: {
-    "click .destroy": "clear",
-    "click .toggle-liked": "toggleLiked"
+    "click .img-trash": "clear",
+    "click .img-like":  "toggleLiked"
   },
 
   initialize: function(options) {
@@ -20,6 +20,12 @@ Photoapp.Views.PhotosThumbView = Backbone.View.extend({
   // Populate the html to the dom
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
+    // Bootstrap tooltips
+    this.$el.find('.img-share').tooltip({
+      title: "Not implemented yet",
+      trigger: "click",
+      container: "body"
+    });
     return this;
   },
 

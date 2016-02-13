@@ -3,6 +3,12 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .img-container {
   display: inline-block;
+
+  &:hover {
+    .img-action {
+      opacity: 1;
+    }
+  }
 }
 
 .img-action {
@@ -14,23 +20,43 @@
   transition: all 0.2s ease-in-out;
   transform: translateY(-15px);
   margin-top: -40px;
+  // text-align: left;
+  background-color: rgba(255, 255, 255, 0);
+  opacity: 0;
 
-  .unliked:before, .liked:before {
+  span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 30%;
+    color: white;
+  }
+
+  .img-trash:before,
+  .img-like:before,
+  .img-share:before {
     font-family: FontAwesome;
     font-style: normal;
     font-weight: normal;
     text-decoration: inherit;
-    font-size: 24px;
-    color: #ff4c4c;
+    font-size: 20px;
     cursor: pointer;
   }
 
-  .unliked:before {
+  .img-trash:before {
+    content: "\f1f8";
+  }
+  .img-like:before {
+    color: #ff4c4c;
+    font-size: 24px;
+  }
+  .img-like.unliked:before {
     content: "\f08a";
   }
-
-  .liked:before {
+  .img-like.liked:before {
     content: "\f004";
+  }
+  .img-share:before {
+    content: "\f045";
   }
 }
 
