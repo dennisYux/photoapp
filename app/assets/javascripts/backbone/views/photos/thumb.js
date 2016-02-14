@@ -95,24 +95,25 @@ Photoapp.Views.PhotosThumbView = Backbone.View.extend({
     Photoapp._trashData.model = this.model;
 
     // Notification and entry for restore
-    var $notice = $('<div/>').addClass("notification-item");
-    var $undo = $('<a/>').addClass("notification-action").text("Undo").on("click", function(){
+    var $notice = $('<div/>').addClass("notice-item");
+    var $undo = $('<a/>').addClass("notice-action").text("Undo").on("click", function(){
       // Restore status, animation and clear trashData
       this.model.set("isRemoved", false);
       this.$el.addClass("img-restored").removeClass("img-removed");
       Photoapp._trashData.model = null;
 
-      $('#notification-list').empty();
+      this.dismissNotice();
 
     }.bind(this));
 
-    $('#notification-list').html($notice.append("Photo removed! ").append($undo));
+    $('#notice-list').html($notice.append("Photo removed! ").append($undo));
   },
 
   ////////////////////////
   // We have push dataTransfer props of native drag event to JQuery event
   // Use ev.dataTransfer (=ev.originalEvent.dataTransfer) for convenience
   dragStartHandler: function(ev) {
+    this.dismissNotice();
     Photoapp._dragAndDropData.uid = this.model.get("uid");
     this.renderDragEffect();
   },
@@ -135,6 +136,8 @@ Photoapp.Views.PhotosThumbView = Backbone.View.extend({
   },
 
   dropHandler: function(ev) {
+    // Clear dragAndDropData
+    Photoapp._dragAndDropData.uid = null;
     this.removeDragEffect();
   },
 
@@ -145,6 +148,14 @@ Photoapp.Views.PhotosThumbView = Backbone.View.extend({
 
   removeDragEffect: function() {
     this.$el.removeClass("img-dragging");
+  },
+
+  dismissNotice: function() {
+    var $notices = $("#notice-list").children();
+    $notices.addClass('notice-dismissed');
+    setTimeout(function(){
+      $notices.remove();
+    }, 300);
   }
 });
 

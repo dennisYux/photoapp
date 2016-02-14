@@ -14,7 +14,7 @@ class PhotosController < ApplicationController
   def index
     # Request 500px API for popular photos stream
     uri = URI.parse(FiveHundredPX_API_URL + '/photos?' + 
-      {feature: 'popular', image_size: 3, rpp: 100, consumer_key: FiveHundredPX_API_CONSUMER_KEY}.to_query
+      {feature: 'popular', image_size: 3, rpp: 20, consumer_key: FiveHundredPX_API_CONSUMER_KEY}.to_query
     )
     # In case network error
     res = begin
