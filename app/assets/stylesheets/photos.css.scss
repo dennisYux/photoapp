@@ -3,16 +3,42 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .img-container {
   display: inline-block;
+  vertical-align: top;
 
   &:hover {
     .img-action {
       opacity: 1;
     }
+    .img-action span {
+      opacity: 1;
+    }
+  }
+}
+
+.img-container.dragging {
+  position: relative;
+
+  .img-content,
+  .img-action {
+    opacity: 0;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 280px;
+    height: 280px;
+    top: 5px;
+    left: 5px;
+    background: #eeeeee;
+    border-radius: 4px;
   }
 }
 
 .img-action {
   padding: 10px;
+  height: 56px;
   border: 1px solid #dddddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
@@ -21,14 +47,19 @@
   transform: translateY(-15px);
   margin-top: -40px;
   // text-align: left;
-  background-color: rgba(255, 255, 255, 0);
   opacity: 0;
 
   span {
     display: inline-block;
     vertical-align: middle;
+    height: 34px;
+    padding: 2px 0;
     width: 30%;
     color: white;
+    opacity: 0;
+  }
+  span.img-like.liked {
+    padding: 0;
   }
 
   .img-trash:before,
@@ -47,13 +78,13 @@
   }
   .img-like:before {
     color: #ff4c4c;
-    font-size: 24px;
   }
   .img-like.unliked:before {
     content: "\f08a";
   }
   .img-like.liked:before {
     content: "\f004";
+    font-size: 24px;
   }
   .img-share:before {
     content: "\f045";

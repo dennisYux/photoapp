@@ -10,3 +10,6 @@ window.Photoapp = {
   Routers: {},
   Views: {},
 };
+
+window._uniqueId = 0;
+window._dragAndDropData = {};

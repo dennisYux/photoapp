@@ -7,7 +7,8 @@ Photoapp.Views.PhotosIndexView = Backbone.View.extend({
     // this.collection = options.collection
     this.listenTo(this.collection, 'add', this.addOne);
     this.listenTo(this.collection, 'reset', this.addAll);
-    this.listenTo(this.collection, 'all', _.debounce(this.render, 0));
+    this.listenTo(this.collection, 'sort', this.addAll);
+    // this.listenTo(this.collection, 'all', _.debounce(this.render, 0));
   },
 
   addAll: function() {
@@ -16,15 +17,7 @@ Photoapp.Views.PhotosIndexView = Backbone.View.extend({
   },
 
   addOne: function(model) {
-    var view = new Photoapp.Views.PhotosThumbView({model: model});
-    // Insert view at specific position
-    // Default to be end of collection view
-    // if (options && options.at) {
-    //   var index = options.at;
-    // } else {
-    //   var index = collection.length;
-    // }
-    // this.$el.find('.img-list .img-container.eq('+index+')').after(view.render().el);
+    var view = new Photoapp.Views.PhotosThumbView({model: model, collection: this.collection});
     this.$el.find('.img-list').append(view.render().el);
   },
 

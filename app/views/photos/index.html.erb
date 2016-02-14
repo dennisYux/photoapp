@@ -1,6 +1,7 @@
 <div id="primary-container"></div>
 <script type="text/javascript">
   $(function(){
+    console.log("HTML5 DragAndDrop="+HTML5FeatureDetect.isDragAndDropSupported);
     window.router = new Photoapp.Routers.PhotosRouter({photos: <%= @photos.to_json.html_safe -%>});
     Backbone.history.start();
   });

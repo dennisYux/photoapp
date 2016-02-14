@@ -20,3 +20,13 @@
 //= require backbone_datalink
 //= require backbone/photoapp
 //= require_tree .
+
+var HTML5FeatureDetect = HTML5FeatureDetect || {};
+HTML5FeatureDetect.isDragAndDropSupported = (function() {
+  var div = document.createElement('div');
+  return ('draggable' in div) || ('ondragstart' in div && 'ondrop' in div);
+})();
+
+// add the dataTransfer property for use with the native `drop` event
+// to capture information about files dropped into the browser window
+$.event.props.push("dataTransfer");
