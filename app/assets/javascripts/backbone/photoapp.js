@@ -17,4 +17,7 @@ window.Photoapp = {
   _uniqueId: 0,
   _dragAndDropData: {},
   _trashData: {},
+  // We should use window.localStorage to store 'isIntroductionShownBefore' tag without annoying user
+  // Here we use global variable for demonstration purpose
+  _isIntroductionShownBefore: {}
 };

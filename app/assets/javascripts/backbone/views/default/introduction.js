@@ -25,15 +25,23 @@ Photoapp.Views.IntroductionView = Backbone.View.extend({
 
   syncOuterContainer: function() {
     if (this.isShown) {
-      // Set localStorage and remove not-shown-before class if first time show
-      if (!window.localStorage.getItem("isIntroductionShownBefore")) {
-        window.localStorage.setItem("isIntroductionShownBefore", true);
+      ////////////////////
+      // // Set localStorage and remove not-shown-before class if first time show
+      // if (!window.localStorage.getItem("isIntroductionShownBefore")) {
+      //   window.localStorage.setItem("isIntroductionShownBefore", true);
+      //   $("#main-container").removeClass("introduction-not-shown-before");
+      // }
+      if (!window._isIntroductionShownBefore) {
+        window._isIntroductionShownBefore = true;
         $("#main-container").removeClass("introduction-not-shown-before");
       }
       $("#main-container").addClass("introduction-shown");
     } else {
-      // Add not-shown-before class if no localStorage data
-      if (!window.localStorage.getItem("isIntroductionShownBefore")) {
+      // // Add not-shown-before class if no localStorage data
+      // if (!window.localStorage.getItem("isIntroductionShownBefore")) {
+      //   $("#main-container").addClass("introduction-not-shown-before");
+      // }
+      if (!window._isIntroductionShownBefore) {
         $("#main-container").addClass("introduction-not-shown-before");
       }
       $("#main-container").removeClass("introduction-shown"); 
