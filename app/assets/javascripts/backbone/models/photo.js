@@ -1,11 +1,12 @@
 Photoapp.Models.PhotoModel = Backbone.Model.extend({
   // Default properties
   defaults: {
-    "isLiked": false
+    "isLiked": false,
+    "isRemoved": false
   },
 
   initialize: function() {
-    this.set("uid", window._uniqueId += 1);
+    this.set("uid", Photoapp._uniqueId += 1);
   }
 });
 

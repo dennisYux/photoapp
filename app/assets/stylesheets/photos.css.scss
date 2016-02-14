@@ -15,7 +15,7 @@
   }
 }
 
-.img-container.dragging {
+.img-container.img-dragging {
   position: relative;
 
   .img-content,
@@ -33,6 +33,57 @@
     left: 5px;
     background: #eeeeee;
     border-radius: 4px;
+    border-width: 2px;
+    border-style: dotted;
+  }
+}
+
+// Inspired by https://sarasoueidan.com/blog/creative-list-effects/
+.img-container.img-removed {
+  animation: img-removed-animation 1s cubic-bezier(0.55, -0.04, 0.91, 0.94) forwards;
+  // transform origin is moved to the bottom left corner
+  transform-origin: 0% 100%;
+}
+
+@keyframes img-removed-animation {
+  0% {
+    opacity: 1;
+    transform: rotateZ(0);
+    width: 290px;
+  }
+  99% {
+    opacity: 0;
+    transform: translateY(600px) rotateZ(90deg);
+    width: 290px;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(600px) rotateZ(90deg);
+    width: 0;
+  }
+}
+
+// the initial state in this animation is same as the final state of the above one
+.img-container.img-restored {
+  animation:
+    img-restored-animation 1s cubic-bezier(0, 0.8, 0.32, 1.07), forwards;
+}
+ 
+@keyframes img-restored-animation {
+  0% {
+    opacity: 0;
+    transform: translateY(600px) rotateZ(90deg);
+    width: 0;
+  }
+  30% {
+    opacity: 0;
+    transform: translateY(600px) rotateZ(90deg);
+    width: 290px;
+  }
+  100% {
+    opacity: 1;
+    transform: rotateZ(0);
+    width: 290px;
   }
 }
 

@@ -7,12 +7,13 @@ Photoapp.Views.PhotosIndexView = Backbone.View.extend({
     // this.collection = options.collection
     this.listenTo(this.collection, 'add', this.addOne);
     this.listenTo(this.collection, 'reset', this.addAll);
-    this.listenTo(this.collection, 'sort', this.addAll);
     // this.listenTo(this.collection, 'all', _.debounce(this.render, 0));
   },
 
   addAll: function() {
     this.$el.find('.img-list').html('');
+    // Any action that triggers redraw will clear remove candidates
+    this.collection.remove(this.collection.where({"isRemoved": true}));
     this.collection.each(this.addOne, this);
   },
 

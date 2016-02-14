@@ -26,7 +26,13 @@ HTML5FeatureDetect.isDragAndDropSupported = (function() {
   var div = document.createElement('div');
   return ('draggable' in div) || ('ondragstart' in div && 'ondrop' in div);
 })();
+HTML5FeatureDetect.isLocalStorageSupported = (function() {
+  return !!window.localStorage;
+})();
 
 // add the dataTransfer property for use with the native `drop` event
 // to capture information about files dropped into the browser window
 $.event.props.push("dataTransfer");
+
+console.log("HTML5 DragAndDrop="+HTML5FeatureDetect.isDragAndDropSupported);
+console.log("HTML5 LocalStorage="+HTML5FeatureDetect.isLocalStorageSupported);

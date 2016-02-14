@@ -9,7 +9,12 @@ window.Photoapp = {
   Collections: {},
   Routers: {},
   Views: {},
-};
 
-window._uniqueId = 0;
-window._dragAndDropData = {};
+  // Globals
+  // Simply set as properties of Photoapp by taking advantage of
+  // automatically reset when page reloads
+  // For data persistence across pages, use window.localStorage
+  _uniqueId: 0,
+  _dragAndDropData: {},
+  _trashData: {},
+};
