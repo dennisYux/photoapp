@@ -5,7 +5,7 @@ Photoapp.Routers.PhotosRouter = Backbone.Router.extend({
   },
 
   initialize: function(options) {
-    this.$container = $('#primary-container');
+    this.$container = $('#body-section');
     this.photos = new Photoapp.Collections.PhotosCollection();
     this.photos.reset(options.photos);
   },

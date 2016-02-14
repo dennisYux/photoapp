@@ -1,7 +1,15 @@
 <div id="notice-list"></div>
-<div id="primary-container"></div>
+<div id="main-container">
+  <div class="container-fluid">
+    <div id="author-words"></div>
+    <div id="body-section"></div>
+  </div>
+</div>
 <script type="text/javascript">
   $(function(){
+    // Render left side panel
+    var view = new Photoapp.Views.IntroductionView();
+    $('#author-words').html(view.render().el);
     window.router = new Photoapp.Routers.PhotosRouter({photos: <%= @photos.to_json.html_safe -%>});
     Backbone.history.start();
   });
