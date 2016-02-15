@@ -24,4 +24,8 @@ class Photo
   def from_fivehundredpx?
     self.source == FivehundredPX
   end
+
+  def as_json(options)
+    super(options).reject{|k,v| k=="description"}
+  end
 end
