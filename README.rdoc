@@ -1,6 +1,6 @@
 == Photo Gallery
 
-Check the live demo here https://photogal.herokuapp.com
+Check the live demo here https://photogal.herokuapp.com (A little bit patience :) )
 
 ==== Quick Notes
 For task 1: We fetch 500px photos in server side and then push them to client for forward adaption consideration.
