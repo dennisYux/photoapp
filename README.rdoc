@@ -1,28 +1,13 @@
-== README
+== Photo Gallery
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Check the live demo here https://photogal.herokuapp.com
 
-Things you may want to cover:
+==== Quick Notes
+For task 1: We fetch 500px photos in server side and then push them to client for forward adaption consideration.
 
-* Ruby version
+For task 2: We store access token in session (cookie store, encrypted and signed by default). For cookie storage optimization and security concern, we could store access token in database and store token object id in cookie.
 
-* System dependencies
+For task 3: We use backbone.js to reoriganize the app as a HTML5 and CSS3 feature enriched single page application.
 
-* Configuration
+Implementation details are further documented as comments in codes.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
