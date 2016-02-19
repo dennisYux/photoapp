@@ -3,11 +3,8 @@
 Check the live demo here https://photogal.herokuapp.com (A little bit patience :) )
 
 ==== Quick Notes
-For task 1: We fetch 500px photos in server side and then push them to client for forward adaption consideration.
 
-For task 2: We store access token in session (cookie store, encrypted and signed by default). For cookie storage optimization and security concern, we could store access token in database and store token object id in cookie.
+A HTML5 and CSS3 feature enriched single page application written with Backbone.js and Ruby on Rails.
 
-For task 3: We use backbone.js to reoriganize the app as a HTML5 and CSS3 feature enriched single page application.
 
-Implementation details are further documented as comments in codes.
 
